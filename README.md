@@ -20,7 +20,3 @@ Helps prevent API abuse and improves security and performance.
 
 ## Internship
 Developed as part of internship at HackerHub LLP.
-
-## Server
-Server successfully set up and tested on port 3000.
-
