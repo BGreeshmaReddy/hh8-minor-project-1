@@ -20,3 +20,14 @@ Helps prevent API abuse and improves security and performance.
 
 ## Internship
 Developed as part of internship at HackerHub LLP.
+## Current Status
+- Express server setup completed
+- Redis Cloud configured
+- Rate limiter middleware implemented
+- Facing SSL compatibility issue with Node.js (to be resolved)
+
+## Next Steps
+- Resolve Redis SSL connection issue
+- Final testing of rate limiting
+- Documentation cleanup
+
