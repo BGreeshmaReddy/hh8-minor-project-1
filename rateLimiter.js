@@ -22,3 +22,28 @@ client.on("error", (err) => {
   await client.connect();
   console.log("Redis connected successfully");
 })();
+const rateLimiter = async (req, res, next) => {
+  try {
+    console.log("Rate limiter middleware executed");
+
+    const key = `rate:${req.ip}`;
+    const count = await client.incr(key);
+
+    if (count === 1) {
+      await client.expire(key, 60);
+    }
+
+    if (count > 10) {
+      return res.status(429).json({
+        message: "Too many requests. Please slow down."
+      });
+    }
+
+    next();
+  } catch (err) {
+    console.error("Rate limiter error:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+// Middleware executes before API routes to control traffic
+
