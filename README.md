@@ -30,4 +30,8 @@ Developed as part of internship at HackerHub LLP.
 - Resolve Redis SSL connection issue
 - Final testing of rate limiting
 - Documentation cleanup
+## API Limits
+- Maximum 10 requests per minute per IP
+- Excess requests receive HTTP 429 status
+
 
