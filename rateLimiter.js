@@ -1,49 +1,29 @@
-// Redis-based API Rate Limiter middleware
-// Prevents API abuse by limiting requests per IP
+const redisClient = require("./redisClient");
 
-const redis = require("redis");
+const RATE_LIMIT = 5;
+const TIME_WINDOW = 60; // seconds
 
-const client = redis.createClient({
-  username: "default",
-  password: "CP4AgHM2RRaR8P3d2gAsl3D5sOoitK6",
-  socket: {
-    host: "redis-10179.c212.ap-south-1-1.ec2.cloud.redislabs.com",
-    port: 10179,
-    tls: true,
-    rejectUnauthorized: false
-  }
-});
-
-client.on("error", (err) => {
-  console.error("Redis Client Error:", err.message);
-});
-
-(async () => {
-  await client.connect();
-  console.log("Redis connected successfully");
-})();
 const rateLimiter = async (req, res, next) => {
   try {
-    console.log("Rate limiter middleware executed");
+    const ip = req.ip;
 
-    const key = `rate:${req.ip}`;
-    const count = await client.incr(key);
+    const currentCount = await redisClient.incr(ip);
 
-    if (count === 1) {
-      await client.expire(key, 60);
+    if (currentCount === 1) {
+      await redisClient.expire(ip, TIME_WINDOW);
     }
 
-    if (count > 10) {
+    if (currentCount > RATE_LIMIT) {
       return res.status(429).json({
-        message: "Too many requests. Please slow down."
+        message: "❌ Too many requests. Try again later."
       });
     }
 
     next();
-  } catch (err) {
-    console.error("Rate limiter error:", err);
-    res.status(500).json({ message: "Internal server error" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
-// Middleware executes before API routes to control traffic
 
+module.exports = rateLimiter; // ⚠️ THIS LINE IS CRITICAL

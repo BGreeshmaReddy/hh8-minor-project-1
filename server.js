@@ -1,22 +1,15 @@
 const express = require("express");
-const rateLimiter = require("./rateLimiter");
+const rateLimiter = require("./rateLimiter"); // path must match filename
 
 const app = express();
+const PORT = 3000;
 
-// Apply rate limiter middleware
-app.use(rateLimiter);
+app.use(rateLimiter); // middleware function
 
 app.get("/", (req, res) => {
-  res.send("API Rate Limiter Server is running 🚀");
+  res.send("✅ Request allowed");
 });
 
-app.get("/test", (req, res) => {
-  res.json({ message: "Request successful" });
-});
-
-const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
-// Express server setup completed
-
