@@ -46,7 +46,7 @@ hh8-minor-project-1/
 How to Run the Project
 1️⃣ Prerequisites
 Node.js installed
-Redis installed and running on port `6379`
+Redis installed and running on port 6379
 2️⃣ Install Dependencies
 bash
 npm install
@@ -62,7 +62,7 @@ Testing the Rate Limiter
 1. Open browser or Postman
 2. Hit:
 http://localhost:3000
-3. Refresh more than **5 times within 60 seconds**
+3. Refresh more than 5 times within 60 seconds**
 4. You will receive:
 json
 {
@@ -99,7 +99,7 @@ This project demonstrates a real-world backend concept used in production system
 
 NEXT STEP (VERY IMPORTANT)
 
-After pasting this into `README.md`, run:
+After pasting this into README.md, run:
 
 bash
 git add README.md
