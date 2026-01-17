@@ -17,7 +17,7 @@ const rateLimiter = async (req, res, next) => {
       return res.status(429).json({
         message: "❌ Too many requests. Try again later."
       });
-    }
+    } // prints too many rejects.
 
     next();
   } catch (error) {
