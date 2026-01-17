@@ -8,9 +8,9 @@ This project demonstrates how to protect APIs from abuse (such as spam requests 
 Redis is used as an **in-memory data store** to efficiently track request counts with automatic expiration.
 Tech Stack
 
-Node.js** – JavaScript runtime
-Express.js** – Web framework for building APIs
-Redis** – In-memory data store for fast request counting
+Node.js– JavaScript runtime
+Express.js– Web framework for building APIs
+Redis– In-memory data store for fast request counting
 Git & GitHub** – Version control
 
 How It Works
@@ -23,8 +23,8 @@ Sets a TTL (time-to-live) for automatic reset
 The API responds with **HTTP 429 (Too Many Requests)**.
 5. After the time window expires, Redis automatically resets the counter.
 Rate Limiting Logic
-Max Requests:** 5
-Time Window:** 60 seconds
+Max Requests:5
+Time Window:60 seconds
 
 Example:
 
