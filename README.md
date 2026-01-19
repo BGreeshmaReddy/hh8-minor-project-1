@@ -2,7 +2,7 @@ Redis-Based API Rate Limiter
 
 A backend project implementing an **API Rate Limiter** using **Node.js, Express, and Redis** to control and prevent excessive client requests within a defined time window.
 
-Project Overview
+->Project Overview
 
 This project demonstrates how to protect APIs from abuse (such as spam requests or DDoS-like behavior) by limiting the number of requests a client can make in a given time period.
 Redis is used as an **in-memory data store** to efficiently track request counts with automatic expiration.
@@ -13,7 +13,7 @@ Express.js– Web framework for building APIs
 Redis– In-memory data store for fast request counting
 Git & GitHub** – Version control
 
-How It Works
+->How It Works
 1. Each incoming request passes through a **rate-limiting middleware**.
 2. The client’s **IP address** is used as a unique key in Redis.
 3. Redis:
@@ -32,7 +32,7 @@ IP: 192.168.1.10
 Requests: 6 within 60 seconds → Blocked
 
 
-Project Structure
+->Project Structure
 
 hh8-minor-project-1/
 │
@@ -43,7 +43,7 @@ hh8-minor-project-1/
 ├── package-lock.json
 └── README.md
 
-How to Run the Project
+->How to Run the Project
 1️⃣ Prerequisites
 Node.js installed
 Redis installed and running on port 6379
@@ -54,7 +54,7 @@ npm install
 bash
 node server.js
 
-Server will start at:
+->Server will start at:
 
 http://localhost:3000
 Testing the Rate Limiter
@@ -77,13 +77,13 @@ Sample Response Codes
 | 429         | Too many requests |
 | 500         | Server error      |
 
-Why Redis?
+->Why Redis?
 Extremely fast (in-memory)
 Supports atomic operations (`INCR`)
 Built-in key expiration (TTL)
 Ideal for distributed systems
 
-Future Enhancements
+->Future Enhancements
 User-based rate limiting (JWT / user ID)
 Per-route rate limits
 Configurable limits via environment variables
@@ -93,7 +93,7 @@ Author
 Bhoompalle Greeshma Reddy
 Backend Mini Project – API Security using Redis
 
-Conclusion
+->Conclusion
 
 This project demonstrates a real-world backend concept used in production systems to improve API reliability, performance, and security.
 
