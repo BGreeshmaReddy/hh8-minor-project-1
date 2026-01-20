@@ -1,13 +1,21 @@
 Redis-Based API Rate Limiter
 
 ->Overview of the project
-hh8-minor-project-1/
+<br>
+hh8-minor-project-1
+<br>
 server.js → Starts server
+<br>
 rateLimiter.js → Main logic
+<br>
 redisClient.js → Redis connection
+<br>
 testRedis.js → Test Redis
+<br>
 package.json → Project info
+<br>
 README.md → Documentation
+
 
 
 A backend project implementing an **API Rate Limiter** using **Node.js, Express, and Redis** to control and prevent excessive client requests within a defined time window.
