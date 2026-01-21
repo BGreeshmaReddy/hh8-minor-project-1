@@ -122,7 +122,7 @@ After pasting this into README.md, run:
 bash
 git add README.md
 git commit -m "Added professional README documentation"
-git push origin main
+git push origin main.
 
 
 
