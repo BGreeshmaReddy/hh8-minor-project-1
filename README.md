@@ -4,7 +4,7 @@ Redis-Based API Rate Limiter
 <br>
 hh8-minor-project-1
 <br>
-server.js → Starts server
+server.js → Starts server.
 <br>
 rateLimiter.js → Main logic
 <br>
