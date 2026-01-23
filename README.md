@@ -14,7 +14,7 @@ testRedis.js → Test Redis
 <br>
 package.json → Project info
 <br>
-README.md → Documentation
+README.md → Documentation.
 
 
 
