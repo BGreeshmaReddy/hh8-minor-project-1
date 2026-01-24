@@ -1,29 +1,37 @@
 const redisClient = require("./redisClient");
 
-const RATE_LIMIT = 5;//Number of requests
-const TIME_WINDOW = 60; // seconds
+const rateLimiter = (limit = 5, windowSec = 60) => {
+  return async (req, res, next) => {
+    try {
+      const key = `rate:${req.ip}`;
 
-const rateLimiter = async (req, res, next) => {
-  try {
-    const ip = req.ip;
+      const count = await redisClient.incr(key);
 
-    const currentCount = await redisClient.incr(ip);
+      if (count === 1) {
+        await redisClient.expire(key, windowSec);
+      }
 
-    if (currentCount === 1) {
-      await redisClient.expire(ip, TIME_WINDOW);
+      const ttl = await redisClient.ttl(key);
+
+      // Always send headers (VERY IMPORTANT)
+      res.setHeader("X-RateLimit-Limit", limit);
+      res.setHeader("X-RateLimit-Used", count);
+      res.setHeader("X-RateLimit-Remaining", Math.max(limit - count, 0));
+      res.setHeader("X-RateLimit-Reset", ttl);
+
+      if (count > limit) {
+        return res.status(429).json({
+          error: "Too many requests",
+          retry_after: ttl
+        });
+      }
+
+      next();
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Rate limiter error" });
     }
-
-    if (currentCount > RATE_LIMIT) {
-      return res.status(429).json({
-        message: "❌ Too many requests. Try again later."
-      });
-    } // prints too many rejects.
-
-    next();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });//prints error
-  }
+  };
 };
 
-module.exports = rateLimiter; // ⚠️ THIS LINE IS CRITICAL
+module.exports = rateLimiter;
