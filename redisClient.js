@@ -1,4 +1,3 @@
-//redisclient
 const redis = require("redis");
 
 const client = redis.createClient({
@@ -9,7 +8,7 @@ const client = redis.createClient({
 });
 
 client.on("connect", () => {
-  console.log("✅ Redis connected"); // checks for the redis connection
+  console.log("✅ Redis connected");
 });
 
 client.on("error", (err) => {
@@ -21,4 +20,3 @@ client.on("error", (err) => {
 })();
 
 module.exports = client;
-//redisClient
