@@ -1,15 +1,18 @@
 const express = require("express");
-const rateLimiter = require("./rateLimiter"); // path must match filename
+const rateLimiter = require("./rateLimiter");
 
 const app = express();
 const PORT = 3000;
 
-app.use(rateLimiter); // middleware function
+// Serve frontend files
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.send("✅ Request allowed");
+// Rate-limited API
+app.get("/api/request", rateLimiter(5, 60), (req, res) => {
+  res.json({ message: "Request allowed" });
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
