@@ -115,14 +115,6 @@ Backend Mini Project – API Security using Redis
 
 This project demonstrates a real-world backend concept used in production systems to improve API reliability, performance, and security.
 
-NEXT STEP (VERY IMPORTANT)
-
-After pasting this into README.md, run:
-
-bash
-git add README.md
-git commit -m "Added professional README documentation"
-git push origin main.
 
 
 
